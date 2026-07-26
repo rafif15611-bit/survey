@@ -1,7 +1,7 @@
 // ===============================
 // GANTI DENGAN URL APPS SCRIPT
 // ===============================
-const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzjJFQIHmYq4Qb8-WbQKFBtUK6yFBwcYsFPGVahrr57WAWatXaNuzInkJV7IDr7X0BKcw/exec";
+const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzlUNxBicxRFHP3sy1LKKLr7SVGa1FDynFHAs2U2uyu8PeFlEdFfZcJRYdSDO-VfiuZOw/exec";
 
 // ===============================
 // ANIMASI PARTIKEL
