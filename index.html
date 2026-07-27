@@ -3,149 +3,510 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Survey Pengibar</title>
 
-  
+<title>Survei Pengibar</title>
 
-<link rel="stylesheet" href="style.css">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(135deg,#430000,#7a0000,#a80000);
+overflow-x:hidden;
+color:white;
+}
+
+#particles-js{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+header{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+
+header h1{
+font-size:60px;
+text-shadow:0 0 20px red;
+animation:zoom 2s infinite alternate;
+}
+
+header p{
+margin-top:20px;
+font-size:20px;
+max-width:700px;
+line-height:1.7;
+}
+
+button{
+padding:15px 35px;
+border:none;
+border-radius:40px;
+background:#ff0000;
+color:white;
+font-size:18px;
+cursor:pointer;
+margin-top:35px;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.08);
+box-shadow:0 0 20px red;
+}
+
+@keyframes zoom{
+from{
+transform:scale(1);
+}
+to{
+transform:scale(1.08);
+}
+}
+
+section{
+padding:80px 20px;
+display:flex;
+justify-content:center;
+}
+
+form{
+width:100%;
+max-width:900px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(255,0,0,.3);
+}
+
+h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+label{
+display:block;
+margin-top:20px;
+font-weight:bold;
+}
+
+input,
+textarea{
+width:100%;
+padding:15px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+font-size:16px;
+}
+
+textarea{
+height:140px;
+resize:none;
+}
+
+.rangeValue{
+text-align:center;
+font-size:24px;
+margin-top:10px;
+font-weight:bold;
+color:#ffb3b3;
+}
+
+.radioBox{
+margin-top:15px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.radioBox label{
+background:rgba(255,255,255,.08);
+padding:15px;
+border-radius:12px;
+cursor:pointer;
+transition:.3s;
+}
+
+.radioBox label:hover{
+background:red;
+}
+
+.send{
+width:100%;
+margin-top:30px;
+}
+
+.success{
+display:none;
+text-align:center;
+padding:20px;
+font-size:22px;
+}
+
+.loading{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.loader{
+width:70px;
+height:70px;
+border:8px solid #fff;
+border-top:8px solid red;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
+<div class="loading" id="loading">
+<div class="loader"></div>
+</div>
+
 <div id="particles-js"></div>
 
-<div class="card">
+<header>
 
-<h1>🎖 Survey Pengibar 🎖</h1>
+<h1 data-aos="zoom-in">
+🚩 SURVEI PENGIBAR
+</h1>
 
-<p class="sub">
-Silakan isi survei berikut dengan jujur.
+<p data-aos="fade-up">
+Terima kasih telah bersedia memberikan pendapatmu.
+Masukanmu sangat berarti untuk perkembangan Pengibar agar menjadi lebih baik lagi.
 </p>
 
-<div class="progress">
-
-<div class="bar" id="bar"></div>
-
-</div>
-
-<form id="form"
-      action="https://api.web3forms.com/submit"
-      method="POST">
-
-    <input type="hidden" name="access_key" value="a0f15804-3427-468a-852e-11ba48011b3e">
-
-    <input type="hidden" name="subject" value="Jawaban Survey Pengibar">
-
-    <input type="hidden" name="from_name" value="Website Survey Pengibar">
-
-<div class="question">
-
-<h3>1. Bagaimana pendapatmu tentang pengibar saat ini?</h3>
-
-<textarea
-name="pendapat"
-required
-placeholder="Tulis jawabanmu..."></textarea>
-
-</div>
-
-<div class="question">
-
-<h3>2. Apa saja kekurangan yang terdapat pada pengibar saat ini?</h3>
-
-<textarea
-name="kekurangan"
-required
-placeholder="Tulis jawabanmu..."></textarea>
-
-</div>
-
-<div class="question">
-
-<h3>3. Apa saja yang harus diperbaiki pada pengibar saat ini?</h3>
-
-<textarea
-name="perbaikan"
-required
-placeholder="Tulis jawabanmu..."></textarea>
-
-</div>
-
-<div class="question">
-
-<h3>4. Berapa persen kamu yakin ketepatan bendera "Ra"?</h3>
-
-<input
-type="number"
-name="persentase"
-min="0"
-max="100"
-required>
-
-</div>
-
-<div class="question">
-
-<h3>5. Siapa yang paling ganteng?</h3>
-
-<label class="option">
-
-<input
-type="radio"
-name="ganteng"
-value="Fàbregas"
-required>
-
-Fàbregas
-
-</label>
-
-<label class="option">
-
-<input
-type="radio"
-name="ganteng"
-value="Khanzaqitito">
-
-Khanzaqitito
-
-</label>
-
-<label class="option">
-
-<input
-type="radio"
-name="ganteng"
-value="Vetran">
-
-Vetran
-
-</label>
-
-</div>
-
-<button type="submit">
-
-Kirim Jawaban 🚀
-
+<button onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">
+Mulai Mengisi
 </button>
 
-</form>
+</header>
+
+<section>
+
+<form id="form">
+
+<h2>Form Survei</h2>
+
+<label>Nama</label>
+<input
+type="text"
+name="Nama"
+required>
+
+<label>
+Bagaimana pendapatmu tentang Pengibar saat ini?
+</label>
+
+<textarea
+name="Pendapat"
+required></textarea>
+
+<label>
+Apa saja kekurangan yang terdapat pada Pengibar saat ini?
+</label>
+
+<textarea
+name="Kekurangan"
+required></textarea>
+
+<label>
+Apa saja yang harus diperbaiki pada Pengibar saat ini?
+</label>
+
+<textarea
+name="Perbaikan"
+required></textarea>
+
+<label>
+Berapa persen kamu yakin terhadap ketepatan bendera "Ra" pada Pengibar saat ini?
+</label>
+
+<input
+type="range"
+min="0"
+max="100"
+value="50"
+id="range">
+
+<div class="rangeValue" id="nilai">
+50%
+</div>
+
+<label>
+Siapa yang paling ganteng di Pengibar saat ini?
+</label>
+
+<div class="radioBox">
+
+<label>
+<input
+type="radio"
+name="Ganteng"
+value="Fàbregas"
+required>
+Fàbregas
+</label>
+
+<label>
+<input
+type="radio"
+name="Ganteng"
+value="Khanzaqitito">
+Khanzaqitito
+</label>
+
+<label>
+<input
+type="radio"
+name="Ganteng"
+value="Vetran">
+Vetran
+</label>
 
 </div>
 
-<script src="script.js"></script>
+<input
+type="hidden"
+name="access_key"
+value="MASUKKAN_ACCESS_KEY_WEB3FORMS">
 
-</body>
-</html>
+<button
+class="send">
+Kirim Jawaban
+</button>
 
-<form action="https://api.web3forms.com/submit" method="POST">
-  <input type="hidden" name="access_key" value="a0f15804-3427-468a-852e-11ba48011b3e">
-  <input type="text" name="name" required>
-  <input type="email" name="email" required>
-  <textarea name="message" required></textarea>
-  <button type="submit">Submit</button>
+<div class="success">
+Terima kasih telah mengisi survei ❤️
+</div>
+
 </form>
+
+</section>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script>
+
+// Inisialisasi animasi
+AOS.init({
+    duration:1000,
+    once:true
+});
+
+// Loading screen
+window.addEventListener("load",()=>{
+    setTimeout(()=>{
+        document.getElementById("loading").style.opacity="0";
+        document.getElementById("loading").style.pointerEvents="none";
+
+        setTimeout(()=>{
+            document.getElementById("loading").style.display="none";
+        },500);
+
+    },1200);
+});
+
+// Slider Persentase
+const range=document.getElementById("range");
+const nilai=document.getElementById("nilai");
+
+range.oninput=function(){
+    nilai.innerHTML=this.value+"%";
+}
+
+// Particles Background
+particlesJS("particles-js",{
+"particles":{
+"number":{
+"value":80,
+"density":{
+"enable":true,
+"value_area":800
+}
+},
+"color":{
+"value":"#ff0000"
+},
+"shape":{
+"type":"circle"
+},
+"opacity":{
+"value":0.5
+},
+"size":{
+"value":3,
+"random":true
+},
+"line_linked":{
+"enable":true,
+"distance":150,
+"color":"#ff4d4d",
+"opacity":0.4,
+"width":1
+},
+"move":{
+"enable":true,
+"speed":2
+}
+},
+"interactivity":{
+"detect_on":"canvas",
+"events":{
+"onhover":{
+"enable":true,
+"mode":"grab"
+},
+"onclick":{
+"enable":true,
+"mode":"push"
+}
+},
+"modes":{
+"grab":{
+"distance":150,
+"line_linked":{
+"opacity":1
+}
+},
+"push":{
+"particles_nb":4
+}
+}
+},
+"retina_detect":true
+});
+
+// Progress Bar
+const progress=document.createElement("div");
+
+progress.style.position="fixed";
+progress.style.top="0";
+progress.style.left="0";
+progress.style.height="5px";
+progress.style.background="red";
+progress.style.width="0%";
+progress.style.zIndex="99999";
+
+document.body.appendChild(progress);
+
+window.addEventListener("scroll",()=>{
+
+let tinggi=
+document.documentElement.scrollHeight-
+document.documentElement.clientHeight;
+
+let scroll=
+document.documentElement.scrollTop;
+
+progress.style.width=
+(scroll/tinggi)*100+"%";
+
+});
+
+// Efek Hover Glow
+document.querySelectorAll("textarea,input").forEach(item=>{
+
+item.addEventListener("focus",()=>{
+
+item.style.boxShadow="0 0 20px red";
+
+});
+
+item.addEventListener("blur",()=>{
+
+item.style.boxShadow="none";
+
+});
+
+});
+
+// Ripple Button
+document.querySelector(".send").addEventListener("click",function(e){
+
+let circle=document.createElement("span");
+
+circle.style.position="absolute";
+circle.style.width="20px";
+circle.style.height="20px";
+circle.style.borderRadius="50%";
+circle.style.background="rgba(255,255,255,.5)";
+circle.style.left=e.offsetX+"px";
+circle.style.top=e.offsetY+"px";
+circle.style.transform="translate(-50%,-50%)";
+circle.style.animation="ripple .8s linear";
+
+this.appendChild(circle);
+
+setTimeout(()=>{
+circle.remove();
+},800);
+
+});
+
+let style=document.createElement("style");
+
+style.innerHTML=`
+.send{
+position:relative;
+overflow:hidden;
+}
+
+@keyframes ripple{
+
+from{
+transform:translate(-50%,-50%) scale(0);
+opacity:1;
+}
+
+to{
+transform:translate(-50%,-50%) scale(18);
+opacity:0;
+}
+
+}
+`;
+
+document.head.appendChild(style);
+
+</script>
